@@ -1,0 +1,40 @@
+# ──────────────────────────────────────────────────────────
+# Spring Boot Application Configuration
+# ──────────────────────────────────────────────────────────
+
+server:
+  port: 8080
+  error:
+    include-message: never
+    include-stacktrace: never
+
+spring:
+  application:
+    name: code-explainer
+
+  # ── Jackson ──────────────────────────────────────────────
+  jackson:
+    default-property-inclusion: non_null
+
+# ── Gemini AI Configuration (FREE) ───────────────────────
+# Get your free key: https://aistudio.google.com/apikey
+gemini:
+  api-key: ${GEMINI_API_KEY:}
+  model: ${GEMINI_MODEL:gemini-3.8-flash}
+  base-url: https://generativelanguage.googleapis.com/v1beta
+  temperature: 0.3
+  max-output-tokens: 4096
+
+# ── Custom App Properties ────────────────────────────────
+app:
+  code-explainer:
+    max-code-length: 10000
+    supported-languages:
+      - java
+      - python
+    request-timeout-seconds: 120
+
+# ── Logging ──────────────────────────────────────────────
+logging:
+  level:
+    com.example.codeexplainer: INFO
